@@ -22,5 +22,6 @@ RUN /bin/bash -c 'cd ~/infrastructure_ws/src; \
 
 RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd ~/infrastructure_ws; catkin_make'
 # added
+RUN cd ~/infrastructure_ws
 RUN source devel/setup.bash
 # ---
