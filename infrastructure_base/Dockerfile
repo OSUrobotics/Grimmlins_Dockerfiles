@@ -9,6 +9,9 @@ RUN echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 # RUN source ~/.bashrc
 RUN sudo apt install -y ros-melodic-moveit
 RUN sudo apt install -y ros-melodic-trac-ik-kinematics-plugin
+# added
+RUN sudo apt install -y net-tools
+# ---
 RUN mkdir -p ~/infrastructure_ws/src
 RUN cd ~/infrastructure_ws
 RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd ~/infrastructure_ws; catkin_make'
