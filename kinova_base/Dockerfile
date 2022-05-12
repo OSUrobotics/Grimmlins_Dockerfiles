@@ -1,7 +1,7 @@
 FROM osrf/ros:melodic-desktop-full
 
 RUN apt update
-RUN apt install -y usbutils
+# RUN apt install -y usbutils
 RUN apt install -y nano
 RUN apt install -y usbutils
 RUN apt install -y libxtst6
