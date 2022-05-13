@@ -19,8 +19,14 @@
     * If you want gui support and you have a Nvidia graphics card use these commands instead
         ```console
         DOCKER_COMMON_ARGS="--gpus all --env=NVIDIA_VISIBLE_DEVICES=all --env=NVIDIA_DRIVER_CAPABILITIES=all --env=DISPLAY --env=QT_X11_NO_MITSHM=1 -v /tmp/.X11-unix:/tmp/.X11-unix:rw"
-
+        ```
+        ```console
         docker run -it --net=host --privileged $DOCKER_COMMON_ARGS --name <name_of_container> <image_name>
+        ```
+
+    * If you want to pass a folder into the container add the following to the docker run command after the --net=host: (paths need to be absolute paths)
+        ```console
+        -v <path_to_folder_on_host>:<path_to_folder_in_container>
         ```
 
 * Open an additional terminal in the container:
