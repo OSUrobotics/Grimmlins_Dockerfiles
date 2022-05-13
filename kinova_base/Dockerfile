@@ -1,14 +1,14 @@
 FROM osrf/ros:melodic-desktop-full
 
-RUN apt update
+RUN apt-get update
 # RUN apt install -y usbutils
-RUN apt install -y nano
-RUN apt install -y usbutils
-RUN apt install -y libxtst6
+RUN apt-get install -y nano
+RUN apt-get install -y usbutils
+RUN apt-get install -y libxtst6
 RUN echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 
-RUN sudo apt install -y ros-melodic-moveit
-RUN sudo apt install -y ros-melodic-trac-ik-kinematics-plugin
+RUN apt-get install -y ros-melodic-moveit
+RUN apt-get install -y ros-melodic-trac-ik-kinematics-plugin
 RUN mkdir -p ~/kinova_ws/src
 RUN cd ~/kinova_ws
 RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd ~/kinova_ws; catkin_make'
