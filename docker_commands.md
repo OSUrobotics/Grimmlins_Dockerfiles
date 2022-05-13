@@ -24,6 +24,7 @@
         ```console
         DOCKER_COMMON_ARGS="--env="DISPLAY" --env="QT_X11_NO_MITSHM=1" -v "/tmp/.X11-unix:/tmp/.X11-unix:rw"
         ```
+    * Run the following to create the container:
         ```console
         docker run -it --net=host --privileged $DOCKER_COMMON_ARGS --name <name_of_container> <image_name>
         ```
