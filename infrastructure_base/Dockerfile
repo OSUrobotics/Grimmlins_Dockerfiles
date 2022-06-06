@@ -16,7 +16,7 @@ RUN mkdir -p ~/infrastructure_ws/src
 RUN cd ~/infrastructure_ws
 RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd ~/infrastructure_ws; catkin_make'
 RUN /bin/bash -c 'cd ~/infrastructure_ws/src; \
-    git clone --recurse-submodules -b new_file_structure https://github.com/OSUrobotics/infrastructure-packages.git; \
+    git clone --recurse-submodules -b main https://github.com/OSUrobotics/infrastructure-packages.git; \
     apt install -y ros-melodic-flexbe-behavior-engine; \
     git clone https://github.com/FlexBE/flexbe_app.git '
 
