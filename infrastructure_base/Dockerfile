@@ -11,6 +11,7 @@ RUN sudo apt install -y ros-melodic-moveit
 RUN sudo apt install -y ros-melodic-trac-ik-kinematics-plugin
 # added
 RUN sudo apt install -y net-tools
+RUN sudo apt install -y curl
 # ---
 RUN mkdir -p ~/infrastructure_ws/src
 RUN cd ~/infrastructure_ws
