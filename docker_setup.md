@@ -1,37 +1,100 @@
-# Notes
+# Docker Setup Instructions
 
-Dockers are similiar to virtual machines, but lighter weight. This will allow for your computer to be running the newest version of linux and still run ROS melodic in an Ubuntu 18.04 enviroment.
-Another benefit is you can create an image per project that has all of the reqirements for that project installed and give it to someone else to run.
 
-Guide:
+## Linux Guide:
 
-* Follow install instructions here: https://docs.docker.com/engine/install/ubuntu/
-* If you are running a Nvidia GPU and you want gui support follow these instructions to install nvidia_docker2: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
+Other distros docker engine install instructions here: https://docs.docker.com/engine/
+
+Docker Desktop here: https://docs.docker.com/desktop/
+
+Nvidia Graphics Cards (do docker install first): https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
   * The first step has you installing docker skip that part but do run: sudo systemctl --now enable docker
- * To get a base image of ubuntu 18.04 with ros melodic full desktop installed: (There may already be a based image for the project you're on)
-    *  Run everytime booting up computer: (This allows docker enviroments to display images) 
-       ```console 
-       xhost +local:docker &> /dev/null
-       ```
-    * To create the docker container run the following:
-      ```console
-      DOCKER_COMMON_ARGS="--gpus all --env=NVIDIA_VISIBLE_DEVICES=all --env=NVIDIA_DRIVER_CAPABILITIES=all --env=DISPLAY --env=QT_X11_NO_MITSHM=1 -v /tmp/.X11-unix:/tmp/.X11-unix:rw"
-      ```
-      (This will open a bash window in the container)
-      ```console
-      sudo docker run -it --net=host --privileged $DOCKER_COMMON_ARGS --name <name_of_container> osrf/ros:melodic-desktop-full
-      ```
-     * In a new terminal run:
-       ```console
-       sudo docker exec -it <name_of_container> bash
-       ```
+
+
+### Step by Step for Docker Engine install on Ubuntu:
+
+1)  ```console,
+    sudo apt-get remove docker docker-engine docker.io containerd runc
+    ```
+
+2)  ```console,
+    sudo apt-get update
+    ```
+
+3) ```console,
+    sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+    ```
+
+4)  ```console,
+    sudo mkdir -p /etc/apt/keyrings
+    ```
+
+5)  ```console,
+     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    ```
+
+6)  ```console,
+    echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    ```
+
+7)  ```console,
+    sudo apt-get update
+    ```
+
+8)  ```console,
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    ```
+9)  ```console,
+    sudo groupadd docker
+    ```
+
+10) ```console,
+    sudo usermod -aG docker $USER
+    ```
+
+11) reboot the computer
+
+<----------------------Docker is installed at this point----------------------------------->
+
+Do the Nvidia [install](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) instructions if you have a Nvidia graphics card.
+
+### Setup for using docker with vs code
+
+1)  ```console,
+    snap install --classic code
+    ```
+
+2) Go to the extensions with in vs code and install the following (They are all made by Microsft):
+    * Docker
+    * Remote - Containers
+
+ 
+### Create a Container: [docker_howto.md](docker_howto.md)
+
+
+
+
+## Guide(Windows):
+
+Docker is able to use wsl2 as the backend allowing you to more efficiently run a Linux container on Windows. (Windows 11 required for gui support)
+
+* Guide for setting up docker on Windows with wsl2: https://docs.docker.com/desktop/windows/wsl/
+ * Guide for setting up wslg(gives gui support): https://github.com/microsoft/wslg
+
+
 
 ## How to get into docker container after the computer is turned on:
-* If you want guis:
+* If you want guis(for Linux):
   ```console
   xhost +local:docker &> /dev/null
   ```
-* Start the container: 
+* Start the container(for windows/wslg you can use the docker application or run this in the wsl terminal): 
   ```console
   sudo docker start <name_of_container>
   ```
@@ -39,11 +102,7 @@ Guide:
   ```console
   sudo docker exec -it <name_of_container> bash
   ```
-  
-## Add user to docker group(don't need sudo for docker commands)
-* https://docs.docker.com/engine/install/linux-postinstall/
-
-
+   
 ## Useful commands:
 * See running containers: 
   ```console
@@ -67,3 +126,4 @@ Guide:
 * https://github.com/koenlek/docker_ros_nvidia
 * https://docs.docker.com/engine/install/ubuntu/
 * https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
+* https://docs.docker.com/engine/install/linux-postinstall/
