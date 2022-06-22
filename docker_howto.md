@@ -5,17 +5,17 @@ To simplify the container process add do the following to ~/.bashrc, allow for d
 
 1)  Gives docker permission to publish gui windows.
     ```console 
-    echo "xhost +local:docker &> /dev/null" >> ~/.bashrc
+    echo 'xhost +local:docker &> /dev/null' >> ~/.bashrc
     ```
 
 2)  Container arguments for graphics
     * Nvidia Graphics Cards:
         ```console,
-        echo "DOCKER_COMMON_ARGS="--gpus all --env=NVIDIA_VISIBLE_DEVICES=all --env=NVIDIA_DRIVER_CAPABILITIES=all --env=DISPLAY --env=QT_X11_NO_MITSHM=1 -v /tmp/.X11-unix:/tmp/.X11-unix:rw"" >> ~/.bashrc
+        echo 'DOCKER_COMMON_ARGS="--gpus all --env=NVIDIA_VISIBLE_DEVICES=all --env=NVIDIA_DRIVER_CAPABILITIES=all --env=DISPLAY --env=QT_X11_NO_MITSHM=1 -v /tmp/.X11-unix:/tmp/.X11-unix:rw"' >> ~/.bashrc
         ```
     * Intel Integrated Graphics:
         ```console,
-        echo "DOCKER_COMMON_ARGS="--env="DISPLAY" --env="QT_X11_NO_MITSHM=1" -v "/tmp/.X11-unix:/tmp/.X11-unix:rw"" >> ~/.bashrc
+        echo 'DOCKER_COMMON_ARGS="--env=DISPLAY --env=QT_X11_NO_MITSHM=1 -v /tmp/.X11-unix:/tmp/.X11-unix:rw"' >> ~/.bashrc
         ```
 3) Create a docker container:
     ```console,
