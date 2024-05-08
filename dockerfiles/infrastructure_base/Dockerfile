@@ -15,7 +15,7 @@ RUN sudo apt install -y net-tools
 # ---
 RUN mkdir -p ~/infrastructure_ws/src
 RUN cd ~/infrastructure_ws
-RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd ~/infrastructure_ws; catkin_make'
+RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd ~/infrastructure_ws; sudo apt install curl; catkin_make'
 RUN /bin/bash -c 'cd ~/infrastructure_ws/src; \
     git clone --recurse-submodules -b main https://github.com/OSUrobotics/infrastructure-packages.git; \
     apt install -y ros-melodic-flexbe-behavior-engine; \
